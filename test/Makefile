@@ -1,5 +1,5 @@
 test: hid-tests
-hid-tests: $(addprefix hid-test-,SIMPLE ADVANCED MOUSE REMOTE_CONTROL)
+hid-tests: $(addprefix hid-test-,SIMPLE ADVANCED MOUSE REMOTE_CONTROL UNITS)
 
 hid-test-%: hid_def.c
 	@gcc -c -I../include -DHID_TEST_$* -o $@.o $<
