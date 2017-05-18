@@ -230,9 +230,9 @@ static const uint8_t hid_report_descriptor[] = {
   HID_UNIT(A(1)), HID_UNIT_EXPONENT(0),
   /* Volt (cm^2 x g^1 x s^-3 x A^-1 x 10^7) */
   HID_UNIT(CM(2), G(1), S(-3), A(-1)), HID_UNIT_EXPONENT(7),
-  /* Watt (cm^2 x g^1 x s^-3) */
+  /* Watt (cm^2 x g^1 x s^-3 x 10^7) */
   HID_UNIT(CM(2), G(1), S(-3)), HID_UNIT_EXPONENT(7),
-  /* Joule (cm^2 x g^1 x s^-2) */
+  /* Joule (cm^2 x g^1 x s^-2 x 10^7) */
   HID_UNIT(CM(2), G(1), S(-2)), HID_UNIT_EXPONENT(7),
 #endif /* HID_TEST_UNITS */
 };
