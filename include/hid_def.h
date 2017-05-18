@@ -1568,6 +1568,8 @@
 #define HID_USAGE2(n, x) HID_ELEM(0x0, LOCAL, n, x)
 #define HID_USAGE(x) _CALL(HID_USAGE2, _CAT2(HID_USAGE_, x))
 
+#define HID_PAGED_USAGE(p, u) HID_ELEM(0x0, LOCAL, 4, (_NTH1(_CAT2(HID_USAGE_PAGE_, p)) << 16) | _NTH1(_CAT2(HID_USAGE_, u)))
+
 #define HID_USAGE_MINIMUM(n, x) HID_ELEM(0x1, LOCAL, n, x)
 #define HID_USAGE_MAXIMUM(n, x) HID_ELEM(0x2, LOCAL, n, x)
 #define HID_DESIGNATOR_INDEX(n, x) HID_ELEM(0x3, LOCAL, n, x)
