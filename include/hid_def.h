@@ -150,7 +150,7 @@
 #define HID_UNIT_EN_ROTATION    0x4
 #define HID_UNIT_VENDOR_DEFINED 0xf
 
-#define HID_UNIT_EXP(n) (((n) < 0) ? (0x10 + (n)) : (n))
+#define HID_UNIT_EXP(n) (!_ASSERT(-8 <= (n) && (n) <= 7) ? (0) : ((n) < 0) ? (0x10 + (n)) : (n))
 #define HID_UNIT_NIB(n, x) ((x) << (4 * (n)))
 
 #define HID_UNIT_LENGTH(n)      HID_UNIT_NIB(1, HID_UNIT_EXP(n))
@@ -369,11 +369,11 @@
 #define HID_USAGE_STICK_HEIGHT       1, 0x39
 
 #define HID_USAGE_PUTTER      1, 0x50
-#define HID_USAGE_IRON(n)     1, (0x50+((n)<1?1:(n)>11?11:(n)))
-#define HID_USAGE_SAND_WEDGE  1, 0x
-#define HID_USAGE_LOFT_WEDGE  1, 0x
-#define HID_USAGE_POWER_WEDGE 1, 0x
-#define HID_USAGE_WOOD(n)     1, (0x5e+((n)<1?1:(n)>9?9:(n)))
+#define HID_USAGE_IRON(n)     1, (0x50 + (_ASSERT(1 <= (n) && (n) <= 11) ? (n) : (0))) /* n: [1..11] */
+#define HID_USAGE_SAND_WEDGE  1, 0x5c
+#define HID_USAGE_LOFT_WEDGE  1, 0x5d
+#define HID_USAGE_POWER_WEDGE 1, 0x5e
+#define HID_USAGE_WOOD(n)     1, (0x5e + (_ASSERT(1 <= (n) && (n) <= 11) ? (n) : (0))) /* n: [1..9] */
 
 /* Game Controls Usages */
 #define HID_USAGE_GAME_3D 1, 0x01
@@ -758,10 +758,10 @@
 #define HID_USAGE_BUTTON_TRIGGER   1, 0x01
 #define HID_USAGE_BUTTON_SECONDARY 1, 0x02
 #define HID_USAGE_BUTTON_TERTIARY  1, 0x03
-#define HID_USAGE_BUTTON(n, x)     n, (0x00+(x))
+#define HID_USAGE_BUTTON(n, x)     n, (0x00 + (_ASSERT(1 <= (n) && (n) <= 2 && 1 <= (x) && (x) <= ((n) == 1 ? 0xff : 0xffff)) ? (x) : (0))) /* x: [1..255] (n:1) or [1..65535] (n:2) */
 
 /* Ordinal Usages */
-#define HID_USAGE_INSTANCE(n, x)      n, (0x00+(x))
+#define HID_USAGE_INSTANCE(n, x)   n, (0x00 + (_ASSERT(1 <= (n) && (n) <= 2 && 1 <= (x) && (x) <= ((n) == 1 ? 0xff : 0xffff)) ? (x) : (0))) /* x: [1..255] (n:1) or [1..65535] (n:2) */
 
 /* Telephony Usages */
 #define HID_USAGE_PHONE                1, 0x01
@@ -1472,7 +1472,7 @@
 #define HID_USAGE_SMB_SELECTOR_PRESETS  1, 0x08
 #define HID_USAGE_SMB_SELECTOR_INFO     1, 0x09
 
-#define HID_USAGE_OPTIONAL_MFG_FUNCTION(n) 1, (0x10 + ((n)<1?1:(n)>5?5:(n)) - 1)
+#define HID_USAGE_OPTIONAL_MFG_FUNCTION(n) 1, (0x09 + (_ASSERT(1 <= (n) && (n) <= 5) ? (n) : (0))) /* n: [1..5] */
 #define HID_USAGE_CONNECTION_TO_SMBUS      1, 0x15
 #define HID_USAGE_OUTPUT_CONNECTION        1, 0x16
 #define HID_USAGE_CHARGER_CONNECTION       1, 0x17
@@ -1531,7 +1531,7 @@
 #define HID_USAGE_MANUFACTURER_DATA          1, 0x8a
 #define HID_USAGE_RECHARGABLE                1, 0x8b
 #define HID_USAGE_WARNING_CAPACITY_LIMIT     1, 0x8c
-#define HID_USAGE_CAPACITY_GRANULARITY(n)    1, (0x8d + ((n)<1?1:(n)>2?2:(n)) - 1)
+#define HID_USAGE_CAPACITY_GRANULARITY(n)    1, (0x8c + (_ASSERT(1 <= (n) && (n) <= 2) ? (n) : (n))) /* n: [1..2] */
 #define HID_USAGE_IOEM_INFORMATION           1, 0x8f
 
 #define HID_USAGE_INHIBIT_CHARGE 1, 0xc0
@@ -1554,7 +1554,7 @@
 
 #define HID_USAGE_CHARGER_SELECTOR_SUPPORT 1, 0xf0
 #define HID_USAGE_CHARGER_SPEC             1, 0xf1
-#define HID_USAGE_LEVEL(n)                 1, (0xf2 + ((n)<2?2:(n)>3?3:(n)) - 2)
+#define HID_USAGE_LEVEL(n)                 1, (0xf0 + (_ASSERT(2 <= (n) && (n) <= 3) ? (n) : (0))) /* n: [2..3] */
 
 /* End of Usages */
 
