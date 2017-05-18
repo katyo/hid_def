@@ -78,12 +78,12 @@
 #define HID_FLAG_BIT_FIELD        (0<<7)
 #define HID_FLAG_BUFFERED_BYTES   (1<<7)
 
-#define HID_FLAG(x) _CAT2(HID_FLAG_, x)
-#define HID_FLAGS(...) (0 _MAP(| HID_FLAG, ##__VA_ARGS__))
+#define HID_APPLY_FLAG(x) _CAT2(HID_FLAG_, x)
+#define HID_UNION_FLAG(...) (0 _MAP(| HID_APPLY_FLAG, ##__VA_ARGS__))
 
-#define HID_INPUT(...)   HID_ELEM(0x8, MAIN, 1, HID_FLAGS(__VA_ARGS__))
-#define HID_OUTPUT(...)  HID_ELEM(0x9, MAIN, 1, HID_FLAGS(__VA_ARGS__))
-#define HID_FEATURE(...) HID_ELEM(0xb, MAIN, 1, HID_FLAGS(__VA_ARGS__))
+#define HID_INPUT(...)   HID_ELEM(0x8, MAIN, 1, HID_UNION_FLAG(__VA_ARGS__))
+#define HID_OUTPUT(...)  HID_ELEM(0x9, MAIN, 1, HID_UNION_FLAG(__VA_ARGS__))
+#define HID_FEATURE(...) HID_ELEM(0xb, MAIN, 1, HID_UNION_FLAG(__VA_ARGS__))
 
 #define HID_COLLECTION_PHYSICAL       0x00 /* group of axes */
 #define HID_COLLECTION_APPLICATION    0x01 /* mouse, keyboard */
