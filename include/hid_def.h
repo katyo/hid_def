@@ -145,10 +145,17 @@
 
 #define HID_UNIT_NONE_SYSTEM    0x0
 #define HID_UNIT_SI_LINEAR      0x1
+#define HID_UNIT_SI_LIN         0x1
 #define HID_UNIT_SI_ROTATION    0x2
+#define HID_UNIT_SI_ROT         0x2
 #define HID_UNIT_EN_LINEAR      0x3
+#define HID_UNIT_EN_LIN         0x3
 #define HID_UNIT_EN_ROTATION    0x4
+#define HID_UNIT_EN_ROT         0x4
 #define HID_UNIT_VENDOR_DEFINED 0xf
+
+#define HID_UNIT_SI(k) HID_UNIT_SI_##k
+#define HID_UNIT_EN(k) HID_UNIT_EN_##k
 
 #define HID_UNIT_EXP(n) (!_ASSERT(-8 <= (n) && (n) <= 7) ? (0) : ((n) < 0) ? (0x10 + (n)) : (n))
 #define HID_UNIT_NIB(n, x) ((x) << (4 * (n)))
@@ -161,17 +168,17 @@
 #define HID_UNIT_LUMINOSITY(n)  HID_UNIT_NIB(6, HID_UNIT_EXP(n))
 
 #define HID_UNIT_NONE           0x0
-#define HID_UNIT_CENTIMETER(n)  (HID_UNIT_SI_LINEAR | HID_UNIT_LENGTH(n))
-#define HID_UNIT_GRAM(n)        (HID_UNIT_SI_LINEAR | HID_UNIT_MASS(n))
-#define HID_UNIT_SECOND(n)      (HID_UNIT_SI_LINEAR | HID_UNIT_TIME(n))
-#define HID_UNIT_KELVIN(n)      (HID_UNIT_SI_LINEAR | HID_UNIT_TEMPERATURE(n))
-#define HID_UNIT_AMPERE(n)      (HID_UNIT_SI_LINEAR | HID_UNIT_CURRENT(n))
-#define HID_UNIT_CANDELLA(n)    (HID_UNIT_SI_LINEAR | HID_UNIT_LUMINOSITY(n))
-#define HID_UNIT_RADIANS(n)     (HID_UNIT_SI_ROTATION | HID_UNIT_LENGTH(n))
-#define HID_UNIT_INCH(n)        (HID_UNIT_EN_LINEAR | HID_UNIT_LENGTH(n))
-#define HID_UNIT_SLUG(n)        (HID_UNIT_EN_LINEAR | HID_UNIT_MASS(n))
-#define HID_UNIT_FAHRENHEIT(n)  (HID_UNIT_EN_LINEAR | HID_UNIT_TEMPERATURE(n))
-#define HID_UNIT_DEGREES(n)     (HID_UNIT_EN_ROTATION | HID_UNIT_LENGTH(n))
+#define HID_UNIT_CENTIMETER(n)  HID_UNIT_LENGTH(n)
+#define HID_UNIT_GRAM(n)        HID_UNIT_MASS(n)
+#define HID_UNIT_SECOND(n)      HID_UNIT_TIME(n)
+#define HID_UNIT_KELVIN(n)      HID_UNIT_TEMPERATURE(n)
+#define HID_UNIT_AMPERE(n)      HID_UNIT_CURRENT(n)
+#define HID_UNIT_CANDELLA(n)    HID_UNIT_LUMINOSITY(n)
+#define HID_UNIT_RADIANS(n)     HID_UNIT_LENGTH(n)
+#define HID_UNIT_INCH(n)        HID_UNIT_LENGTH(n)
+#define HID_UNIT_SLUG(n)        HID_UNIT_MASS(n)
+#define HID_UNIT_FAHRENHEIT(n)  HID_UNIT_TEMPERATURE(n)
+#define HID_UNIT_DEGREES(n)     HID_UNIT_LENGTH(n)
 
 #define HID_UNIT_CM(n)          HID_UNIT_CENTIMETER(n)
 #define HID_UNIT_G(n)           HID_UNIT_GRAM(n)

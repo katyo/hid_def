@@ -124,16 +124,16 @@ In some report descriptors you need use measurement units. The HID specification
 
 ```C
 /* Ampere is a basic unit */
-HID_UNIT(A(1)), HID_UNIT_EXPONENT(0),
+HID_UNIT(SI(LIN), A(1)), HID_UNIT_EXPONENT(0),
 /* Volt can be derived as cm^2 x g^1 x s^-3 x A^-1 x 10^7 */
-HID_UNIT(CM(2), G(1), S(-3), A(-1)), HID_UNIT_EXPONENT(7),
+HID_UNIT(SI(LIN), CM(2), G(1), S(-3), A(-1)), HID_UNIT_EXPONENT(7),
 /* Watt can be derived as cm^2 x g^1 x s^-3 */
-HID_UNIT(CM(2), G(1), S(-3)), HID_UNIT_EXPONENT(7),
+HID_UNIT(SI(LIN), CM(2), G(1), S(-3)), HID_UNIT_EXPONENT(7),
 /* Joule can be derived as cm^2 x g^1 x s^-2 */
-HID_UNIT(CM(2), G(1), S(-2)), HID_UNIT_EXPONENT(7),
+HID_UNIT(SI(LIN), CM(2), G(1), S(-2)), HID_UNIT_EXPONENT(7),
 ```
 
-In example above we used the next basic units: Centimeter (CM), Gram (G), Second (S), Ampere (A). With it we derived the next derivative units: Volt (V), Watt (W), Joule (J). Moreover we required to use unit exponent to fit value order.
+In example above we used linear Si measurement system (SI(LIN)) and the next basic units: Centimeter (CM), Gram (G), Second (S), Ampere (A). With it we derived the next derivative units: Volt (V), Watt (W), Joule (J). Moreover we required to use unit exponent to fit value order.
 
 ## Additional examples
 

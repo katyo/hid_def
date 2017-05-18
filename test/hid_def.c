@@ -210,29 +210,34 @@ static const uint8_t hid_report_descriptor[] = {
 
 #ifdef HID_TEST_UNITS
   /* Centimeter */
-  HID_UNIT(CM(1)), HID_UNIT_EXPONENT(0),
+  HID_UNIT(SI(LIN), CM(1)), HID_UNIT_EXPONENT(0),
   /* Nanometer */
-  HID_UNIT(CM(1)), HID_UNIT_EXPONENT(-7),
+  HID_UNIT(SI(LIN), CM(1)), HID_UNIT_EXPONENT(-7),
   /* Micrometer */
-  HID_UNIT(CM(1)), HID_UNIT_EXPONENT(-4),
+  HID_UNIT(SI(LIN), CM(1)), HID_UNIT_EXPONENT(-4),
   /* Millimeter */
-  HID_UNIT(CM(1)), HID_UNIT_EXPONENT(-1),
+  HID_UNIT(SI(LIN), CM(1)), HID_UNIT_EXPONENT(-1),
   /* Decimeter */
-  HID_UNIT(CM(1)), HID_UNIT_EXPONENT(1),
+  HID_UNIT(SI(LIN), CM(1)), HID_UNIT_EXPONENT(1),
   /* Meter */
-  HID_UNIT(CM(1)), HID_UNIT_EXPONENT(2),
+  HID_UNIT(SI(LIN), CM(1)), HID_UNIT_EXPONENT(2),
   /* Kilometer */
-  HID_UNIT(CM(1)), HID_UNIT_EXPONENT(5),
+  HID_UNIT(SI(LIN), CM(1)), HID_UNIT_EXPONENT(5),
   /* Megameter */
-  HID_UNIT(CM(1)), HID_UNIT_EXPONENT(7),
+  HID_UNIT(SI(LIN), CM(1)), HID_UNIT_EXPONENT(7),
   
   /* Ampere */
-  HID_UNIT(A(1)), HID_UNIT_EXPONENT(0),
+  HID_UNIT(SI(LIN), A(1)), HID_UNIT_EXPONENT(0),
   /* Volt (cm^2 x g^1 x s^-3 x A^-1 x 10^7) */
-  HID_UNIT(CM(2), G(1), S(-3), A(-1)), HID_UNIT_EXPONENT(7),
+  HID_UNIT(SI(LIN), CM(2), G(1), S(-3), A(-1)), HID_UNIT_EXPONENT(7),
   /* Watt (cm^2 x g^1 x s^-3 x 10^7) */
-  HID_UNIT(CM(2), G(1), S(-3)), HID_UNIT_EXPONENT(7),
+  HID_UNIT(SI(LIN), CM(2), G(1), S(-3)), HID_UNIT_EXPONENT(7),
   /* Joule (cm^2 x g^1 x s^-2 x 10^7) */
-  HID_UNIT(CM(2), G(1), S(-2)), HID_UNIT_EXPONENT(7),
+  HID_UNIT(SI(LIN), CM(2), G(1), S(-2)), HID_UNIT_EXPONENT(7),
+
+  /* Linear acceleration (m x s^2) */
+  HID_UNIT(SI(LIN), RAD(1), S(2)), HID_UNIT_EXPONENT(2),
+  /* Angular acceleration (rad x s^2) */
+  HID_UNIT(SI(ROT), RAD(1), S(2)), HID_UNIT_EXPONENT(0),
 #endif /* HID_TEST_UNITS */
 };
