@@ -65,6 +65,6 @@
  */
 #define _MAP(f, ...) _EVAL(_MAP1(f, __VA_ARGS__, ()()(), ()()(), ()()(), 0))
 
-#define _ASSERT(x) (1/(!!(x)) ? (x) : (x))
+#define _ASSERT(x) ((1/(!!(x))) ? (x) : (x))
 
 #endif /* __MACRO_H__ */
