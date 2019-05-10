@@ -30,16 +30,44 @@
 #define HID_DATA0(x)
 #define HID_DATA1(x) , (x)
 
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
-#define HID_DATA2(x) , (((x) >> 0) & 0xff), (((x) >> 8) & 0xff)
-#define HID_DATA4(x) , (((x) >> 0) & 0xff), (((x) >> 8) & 0xff), (((x) >> 16) & 0xff), (((x) >> 24) & 0xff)
-#else /* __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__ || __BYTE_ORDER__ == __ORDER_PDP_ENDIAN__ */
-#define HID_DATA2(x) , (((x) >> 8) & 0xff), (((x) >> 0) & 0xff)
-#if __BYTE_ORDER__ == __ORDER_PDP_ENDIAN__
-#define HID_DATA4(x) , (((x) >> 16) & 0xff), (((x) >> 24) & 0xff), (((x) >> 0) & 0xff), (((x) >> 8) & 0xff)
-#else /* __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__ */
-#define HID_DATA4(x) , (((x) >> 24) & 0xff), (((x) >> 16) & 0xff), (((x) >> 8) & 0xff), (((x) >> 0) & 0xff)
+#define HID_ENDIAN_LITTLE 1
+#define HID_ENDIAN_BIG 2
+#define HID_ENDIAN_PDP 3
+
+#ifndef HID_ENDIAN
+#  ifdef __GNUC__
+#    if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#      define HID_ENDIAN HID_ENDIAN_LITTLE
+#    elif __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
+#      define HID_ENDIAN HID_ENDIAN_BIG
+#    elif __BYTE_ORDER__ == __ORDER_PDP_ENDIAN__
+#      define HID_ENDIAN HID_ENDIAN_PDP
+#    else
+#      error "Unsupported endian! Possibly you should define HID_ENDIAN macro."
+#    endif
+#  else
+#    ifdef _MSC_VER
+#      ifdef _WIN32
+#        define HID_ENDIAN HID_ENDIAN_LITTLE
+#      endif
+#    endif
+#  endif
 #endif
+
+#ifndef HID_ENDIAN
+#  error "Unable to determine endianness! Possibly you should define HID_ENDIAN macro."
+#endif
+
+#if HID_ENDIAN == HID_ENDIAN_LITTLE
+#  define HID_DATA2(x) , (((x) >> 0) & 0xff), (((x) >> 8) & 0xff)
+#  define HID_DATA4(x) , (((x) >> 0) & 0xff), (((x) >> 8) & 0xff), (((x) >> 16) & 0xff), (((x) >> 24) & 0xff)
+#else /* HID_ENDIAN == HID_ENDIAN_BIG || HID_ENDIAN == HID_ENDIAN_PDP */
+#  define HID_DATA2(x) , (((x) >> 8) & 0xff), (((x) >> 0) & 0xff)
+#  if HID_ENDIAN == HID_ENDIAN_PDP
+#    define HID_DATA4(x) , (((x) >> 16) & 0xff), (((x) >> 24) & 0xff), (((x) >> 0) & 0xff), (((x) >> 8) & 0xff)
+#  else /* HID_ENDIAN == HID_ENDIAN_BIG */
+#    define HID_DATA4(x) , (((x) >> 24) & 0xff), (((x) >> 16) & 0xff), (((x) >> 8) & 0xff), (((x) >> 0) & 0xff)
+#  endif
 #endif
 
 #define HID_DATA(size, data) _CAT2(HID_DATA, size)(data)
