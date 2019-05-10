@@ -1,5 +1,11 @@
 #ifndef __HID_DEF_H__
 #define __HID_DEF_H__
+/**
+ * @defgroup hid HID Defines
+ * @brief The helpful HID macros definitions
+ *
+ * @{
+ */
 
 #include "macro.h"
 
@@ -169,7 +175,14 @@
 #define HID_PHYSICAL_MINIMUM(n, x) HID_ELEM(0x3, GLOBAL, n, x)
 #define HID_PHYSICAL_MAXIMUM(n, x) HID_ELEM(0x4, GLOBAL, n, x)
 
-#define HID_UNIT_EXPONENT(x) HID_ELEM(0x5, GLOBAL, 1, x)
+/**
+ * @brief HID unit exponent
+ *
+ * @param e The unit exponent
+ *
+ * unit x 10 ^ e
+ */
+#define HID_UNIT_EXPONENT(e) HID_ELEM(0x5, GLOBAL, 1, e)
 
 #define HID_UNIT_NONE_SYSTEM    0x0
 #define HID_UNIT_SI_LINEAR      0x1
@@ -223,7 +236,43 @@
 
 #define HID_APPLY_UNIT(x) _CAT2(HID_UNIT_, x)
 #define HID_UNION_UNIT(...) (0 _MAP(| HID_APPLY_UNIT, ##__VA_ARGS__))
+
+/**
+ * @brief HID units
+ *
+ * @param ... The set of basic units with exponent
+ *
+ * The measurement systems:
+ * @li SI(k) - Si units
+ * @li EN(k) - English units
+ * where @p k is LINEAR (LIN) or ROTATION (ROT).
+ *
+ * The basic units:
+ * @li CENTIMETER(e) or CM(e) - Centimeter ^ e
+ * @li GRAM(e) or G(e) - Gram ^ e
+ * @li SECOND(e) or S(e) - Second ^ e
+ * @li KELVIN(e) or K(e) - Kelvin ^ e
+ * @li AMPERE(e) or A(e) - Ampere ^ e
+ * @li CANDELLA(e) or CD(e) - Candella ^ e
+ * @li RADIANS(e) or RAD(e) - Radians ^ e
+ * @li INCH(e) or IN(e) - Inch ^ e
+ * @li SLUG(e) - Slug ^ e
+ * @li FAHRENHEIT(n) or F(e) - Fahrenheit ^ e
+ * @li DEGREES(e) or DEG(e) - Degrees ^ e
+ */
 #define HID_UNIT(...) HID_ELEM(0x6, GLOBAL, 4, HID_UNION_UNIT(__VA_ARGS__))
+
+/*
+#define HID_UNITS_NM HID_UNIT(CM(1)), HID_UNIT_EXPONENT(-7)
+#define HID_UNITS_UM HID_UNIT(CM(1)), HID_UNIT_EXPONENT(-4)
+#define HID_UNITS_MM HID_UNIT(CM(1)), HID_UNIT_EXPONENT(-1)
+#define HID_UNITS_CM _EVAL(HID_UNIT(CM(1)), HID_UNIT_EXPONENT(0))
+#define HID_UNITS_DM HID_UNIT(CM(1)), HID_UNIT_EXPONENT(1)
+#define HID_UNITS_M  HID_UNIT(CM(1)), HID_UNIT_EXPONENT(2)
+#define HID_UNITS_KM HID_UNIT(CM(1)), HID_UNIT_EXPONENT(5)
+*/
+
+#define HID_UNITS(x) _CAT2(HID_UNITS_, x)
 
 #define HID_REPORT_SIZE(x) HID_ELEM(0x7, GLOBAL, 1, x)
 #define HID_REPORT_ID(x) HID_ELEM(0x8, GLOBAL, 1, x)
@@ -1610,4 +1659,7 @@
 #define HID_DELIMITER_OPEN HID_DELIMITER(1)
 #define HID_DELIMITER_CLOSE HID_DELIMITER(0)
 
+/**
+ * @}
+ */
 #endif /* __HID_DEF_H__ */
