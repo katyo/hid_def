@@ -85,7 +85,7 @@ static const uint8_t mouse_hid_report_descriptor[] = {
 00000030  c0 c0                                             |..|
 ```
 
-А это результат преобразования двоичного представления обратно в текст, используя утилиту `ridrd-convert`:
+А это результат преобразования двоичного представления обратно в текст, используя утилиту `hidrd-convert`:
 
 ```
 Usage Page (Desktop),               ; Generic desktop controls (01h)

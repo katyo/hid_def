@@ -85,7 +85,7 @@ This is a binary output which get for that descriptor as result of compilation:
 00000030  c0 c0                                             |..|
 ```
 
-This is result of converting binary representation back to text using `ridrd-convert` utility:
+This is result of converting binary representation back to text using `hidrd-convert` utility:
 
 ```
 Usage Page (Desktop),               ; Generic desktop controls (01h)
