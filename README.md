@@ -6,6 +6,9 @@ The language itself is quite similar to the examples from specification ([HID1_1
 
 Of course, you **must** understand how HID report descriptors arranged and how to construct it using elements, but more you don't need to think about its internal binary representation.
 
+*IMPORTANT NOTE*: Because this DSL was developed for and using GCC/CLang so it haven't tested with other kind compilers.
+So PRs with support for other compilers are welcome.
+
 ## The usage example
 
 In order to get first notion about this library look the example below.
